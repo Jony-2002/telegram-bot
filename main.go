@@ -27,7 +27,7 @@ func main() {
 }
 
 func Recovery() {
-	fmt.Println("Saaassas")
+	// fmt.Println("Saaassas")
 	ReadUser()
 	res, err := tgbotapi.NewBotAPI("6847516848:AAFsEZJyI2LD5sJt-lkIxdUtp_KQlN5_KNY")
 
@@ -63,15 +63,17 @@ func Recovery() {
 		} else {
 			if isExisting {
 				fmt.Println(eachUpdate.Message.Text)
-				for _, item := range SignUpSlice {
+				for index, item := range SignUpSlice {
 					if item.TelegramLogin == eachUpdate.Message.Chat.UserName {
-						item.Password = eachUpdate.Message.Text
+						SignUpSlice[index].Password = eachUpdate.Message.Text
 						isExisting = false
+						WriteUser()
 					}
 				}
 			}
 		}
 	}
+	
 }
 
 func SignUp(c *gin.Context) {
